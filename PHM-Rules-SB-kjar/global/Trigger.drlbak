@@ -1,0 +1,241 @@
+package com.health_insurance.phm_rules;
+
+import com.health_insurance.phm_model.Trigger;
+import com.health_insurance.phm_model.Task;
+import com.health_insurance.phm_model.Response;
+import com.health_insurance.phm_model.TaskActorAssignment;
+import com.health_insurance.phm_model.Reminder;
+
+//from row number: 1
+//no DMARD Rx
+rule "Row 1 Trigger"
+	dialect "mvel"
+	when
+		trigger : Trigger( triggerId == 74 )
+	then
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MMM-yyyy");
+		Task task = new Task();
+		task.setId( 35 );
+		task.setOrigId( "A490.0" );
+		task.setSuppressed( false );
+		task.setExpirationDate( sdf.parse("31-Dec-2020") );
+		task.setClose( "HARD" );
+		task.setReminderInitiation( "P15D" );
+		task.setReminderFrequency( "R/P15D" );
+		task.setEscalationTimer( "P30D" );
+		task.setDescription( "Provider activity" );
+		insert( task );
+		TaskActorAssignment assignment = new TaskActorAssignment();
+		assignment.setActor( "Peter" );
+		assignment.setChannel( "MCC" );
+		assignment.setEscalationActor( "Patricia" );
+		assignment.setEscalationChannel( "CCN" );
+		insert( assignment );
+		Reminder reminder = new Reminder();
+		reminder.setAddress( "peter@doctor.com" );
+		reminder.setFrom( "PHM@healthinsurance.com" );
+		reminder.setSubject( "Reminder" );
+		reminder.setBody( "Hello Peter, this is a friendly reminder that you have to complete your task." );
+		insert( reminder );
+		Response response = new Response();
+		response.setTask( task );
+		response.setAssignment( assignment );
+		response.setReminder( reminder );
+		insert( response );
+		System.out.println("===> firing rule "+drools.getRule().getName());
+end
+
+//from row number: 2
+//no DMARD Rx
+rule "Row 2 Trigger"
+	dialect "mvel"
+	when
+		trigger : Trigger( triggerId == 74 )
+	then
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MMM-yyyy");
+		Task task = new Task();
+		task.setId( 58 );
+		task.setOrigId( "B143" );
+		task.setSuppressed( false );
+		task.setExpirationDate( sdf.parse("31-Dec-2020") );
+		task.setClose( "HARD" );
+		task.setReminderInitiation( "P30D" );
+		task.setReminderFrequency( "R/P30D" );
+		task.setEscalationTimer( "P90D" );
+		task.setDescription( "Community activity" );
+		insert( task );
+		TaskActorAssignment assignment = new TaskActorAssignment();
+		assignment.setActor( "Charlie" );
+		assignment.setChannel( "CCN" );
+		assignment.setEscalationActor( "Marc" );
+		assignment.setEscalationChannel( "CCN" );
+		insert( assignment );
+		Reminder reminder = new Reminder();
+		reminder.setAddress( "charlie@healthinsurance.com" );
+		reminder.setFrom( "PHM@healthinsurance.com" );
+		reminder.setSubject( "Reminder" );
+		reminder.setBody( "Hello Peter, this is a friendly reminder that you have to complete your task." );
+		insert( reminder );
+		Response response = new Response();
+		response.setTask( task );
+		response.setAssignment( assignment );
+		response.setReminder( reminder );
+		insert( response );
+		System.out.println("===> firing rule "+drools.getRule().getName());
+end
+
+//from row number: 3
+//no DMARD Rx
+rule "Row 3 Trigger"
+	dialect "mvel"
+	when
+		trigger : Trigger( triggerId == 74 )
+	then
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MMM-yyyy");
+		Task task = new Task();
+		task.setId( 128 );
+		task.setOrigId( "C201" );
+		task.setPredecessor( 35 );
+		task.setSuppressed( false );
+		task.setExpirationDate( sdf.parse("31-Dec-2020") );
+		task.setClose( "SOFT" );
+		task.setReminderInitiation( "P7D" );
+		task.setReminderFrequency( "R/P7D" );
+		task.setEscalationTimer( "P30D" );
+		task.setDescription( "Member activity" );
+		insert( task );
+		TaskActorAssignment assignment = new TaskActorAssignment();
+		assignment.setActor( "Mary" );
+		assignment.setChannel( "MLP" );
+		assignment.setEscalationActor( "Charlie" );
+		assignment.setEscalationChannel( "CCN" );
+		insert( assignment );
+		Reminder reminder = new Reminder();
+		reminder.setAddress( "mary@mail.com" );
+		reminder.setFrom( "PHM@healthinsurance.com" );
+		reminder.setSubject( "Reminder" );
+		reminder.setBody( "Hello Peter, this is a friendly reminder that you have to complete your task." );
+		insert( reminder );
+		Response response = new Response();
+		response.setTask( task );
+		response.setAssignment( assignment );
+		response.setReminder( reminder );
+		insert( response );
+		System.out.println("===> firing rule "+drools.getRule().getName());
+end
+
+//from row number: 4
+//no DMARD Rx
+rule "Row 4 Trigger"
+	dialect "mvel"
+	when
+		trigger : Trigger( triggerId == 74 )
+	then
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MMM-yyyy");
+		Task task = new Task();
+		task.setId( 112 );
+		task.setOrigId( "C178" );
+		task.setPredecessor( 35 );
+		task.setSuppressed( false );
+		task.setExpirationDate( sdf.parse("31-Dec-2020") );
+		task.setClose( "SOFT" );
+		task.setReminderInitiation( "P7D" );
+		task.setReminderFrequency( "R/P7D" );
+		task.setEscalationTimer( "P30D" );
+		task.setDescription( "Pharmacist activity" );
+		insert( task );
+		TaskActorAssignment assignment = new TaskActorAssignment();
+		assignment.setActor( "Robert" );
+		assignment.setChannel( "CCN" );
+		assignment.setEscalationActor( "Matthew" );
+		assignment.setEscalationChannel( "CCN" );
+		insert( assignment );
+		Reminder reminder = new Reminder();
+		reminder.setAddress( "robert@pharmacy.com" );
+		reminder.setFrom( "PHM@healthinsurance.com" );
+		reminder.setSubject( "Reminder" );
+		reminder.setBody( "Hello Peter, this is a friendly reminder that you have to complete your task." );
+		insert( reminder );
+		Response response = new Response();
+		response.setTask( task );
+		response.setAssignment( assignment );
+		response.setReminder( reminder );
+		insert( response );
+		System.out.println("===> firing rule "+drools.getRule().getName());
+end
+
+//from row number: 5
+rule "Row 5 Trigger"
+	dialect "mvel"
+	when
+		trigger : Trigger( triggerId == 184 )
+	then
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MMM-yyyy");
+		Task task = new Task();
+		task.setId( 76 );
+		task.setOrigId( "C123.0" );
+		task.setSuppressed( false );
+		task.setExpirationDate( sdf.parse("31-Dec-2020") );
+		task.setClose( "SOFT" );
+		task.setReminderInitiation( "P14D" );
+		task.setReminderFrequency( "R/P14D" );
+		task.setEscalationTimer( "P30D" );
+		task.setDescription( "Provider action" );
+		insert( task );
+		TaskActorAssignment assignment = new TaskActorAssignment();
+		assignment.setActor( "Robert" );
+		assignment.setChannel( "MCC" );
+		assignment.setEscalationActor( "Matthew" );
+		assignment.setEscalationChannel( "CCN" );
+		insert( assignment );
+		Reminder reminder = new Reminder();
+		reminder.setAddress( "robert@pharmacy.com" );
+		reminder.setFrom( "PHM@healthinsurance.com" );
+		reminder.setSubject( "Reminder" );
+		reminder.setBody( "Hello Peter, this is a friendly reminder that you have to complete your task." );
+		insert( reminder );
+		Response response = new Response();
+		response.setTask( task );
+		response.setAssignment( assignment );
+		response.setReminder( reminder );
+		insert( response );
+		System.out.println("===> firing rule "+drools.getRule().getName());
+end
+
+//from row number: 6
+rule "Row 6 Trigger"
+	dialect "mvel"
+	when
+		trigger : Trigger( triggerId == 184 )
+	then
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MMM-yyyy");
+		Task task = new Task();
+		task.setId( 48 );
+		task.setOrigId( "B104" );
+		task.setSuppressed( false );
+		task.setExpirationDate( sdf.parse("31-Dec-2020") );
+		task.setClose( "SOFT" );
+		task.setReminderInitiation( "P1000M" );
+		task.setReminderFrequency( "R/P1000M" );
+		task.setEscalationTimer( "P1000M" );
+		task.setDescription( "Pharmacist action" );
+		insert( task );
+		TaskActorAssignment assignment = new TaskActorAssignment();
+		assignment.setActor( "Peter" );
+		assignment.setChannel( "CCN" );
+		assignment.setEscalationActor( "Allison" );
+		assignment.setEscalationChannel( "CCN" );
+		insert( assignment );
+		Reminder reminder = new Reminder();
+		reminder.setAddress( "allison@healthinsurance.com" );
+		reminder.setFrom( "PHM@healthinsurance.com" );
+		reminder.setSubject( "Reminder" );
+		reminder.setBody( "Hello Peter, this is a friendly reminder that you have to complete your task." );
+		insert( reminder );
+		Response response = new Response();
+		response.setTask( task );
+		response.setAssignment( assignment );
+		response.setReminder( reminder );
+		insert( response );
+		System.out.println("===> firing rule "+drools.getRule().getName());
+end
