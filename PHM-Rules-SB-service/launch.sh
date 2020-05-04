@@ -24,6 +24,7 @@ if [ "$MVN_ARG_LINE" != "" ] ; then
 
     "$mvnBin" -v
     echo
+    #the line below doesn't resolve the wildcard and models and kjars are not built
     #projects=( "*-model" "*-kjar" "PHM-Rules-SB-service")
     projects=( "PHM-Rules-SB-model" "PHM-Rules-SB-kjar" "PHM-Rules-SB-service")
 
@@ -75,6 +76,7 @@ else
 	echo "Launching the application locally..."
 	pattern="PHM-Rules-SB-service"
 	files=( $pattern )
+    #the line below doesn't work
     #cd ${files[0]}
     cd PHM-Rules-SB-service
 	executable="$(ls  *target/*.jar | tail -n1)"
