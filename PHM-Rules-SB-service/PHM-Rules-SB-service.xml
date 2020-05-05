@@ -21,11 +21,11 @@
   </configuration>
   <containers>
     <container>
-      <containerId>PHM-Rules-SB-kjar-1_0-SNAPSHOT</containerId>
+      <containerId>PHM-Rules-SB-kjar-1_0</containerId>
       <releaseId>
         <groupId>com.health-insurance</groupId>
         <artifactId>PHM-Rules-SB-kjar</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
       </releaseId>
       <status>STARTED</status>
       <scanner>
@@ -49,7 +49,7 @@
         </config-item>
         <config-item>
           <name>RuntimeStrategy</name>
-          <value>PER_PROCESS_INSTANCE</value>
+          <value>SINGLETON</value>
           <type>BPM</type>
         </config-item>
       </configItems>

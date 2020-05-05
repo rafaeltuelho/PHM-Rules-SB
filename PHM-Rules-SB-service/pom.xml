@@ -3,30 +3,25 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.health-insurance</groupId>
   <artifactId>PHM-Rules-SB-service</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>jar</packaging>
   <name>PHM-Rules-SB-service</name>
-
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <!--version>2.2.2.RELEASE</version-->
     <version>2.1.13.RELEASE</version>
   </parent>
-
   <properties>
     <!--version.org.kie>7.36.0.Final</version.org.kie-->
     <version.org.kie>7.33.0.Final</version.org.kie>
-    <!--maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.source>1.8</maven.compiler.source-->
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <narayana.version>5.9.0.Final</narayana.version>
     <fabric8.version>3.5.42</fabric8.version>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.kie</groupId>
@@ -39,7 +34,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <build>
     <plugins>
       <plugin>
@@ -48,9 +42,7 @@
       </plugin>
     </plugins>
   </build>
-
   <profiles>
-
     <profile>
       <id>docker</id>
       <activation>
@@ -58,7 +50,6 @@
           <name>docker</name>
         </property>
       </activation>
-
       <build>
         <plugins>
           <plugin>
@@ -69,7 +60,8 @@
               <verbose>false</verbose>
               <images>
                 <image>
-                  <name>apps/${project.artifactId}:${project.version}</name>
+                  <!--name>apps/${project.artifactId}:${project.version}</name-->
+                  <name>apps/phm-rules-sb-service:${project.version}</name>
                   <build>
                     <from>fabric8/java-jboss-openjdk8-jdk</from>
                     <assembly>
@@ -125,12 +117,10 @@
           <name>openshift</name>
         </property>
       </activation>
-
       <properties>
         <fabric8.mode>openshift</fabric8.mode>
         <fabric8.build.strategy>docker</fabric8.build.strategy>
       </properties>
-
       <build>
         <plugins>
           <plugin>
@@ -194,7 +184,6 @@
       </build>
     </profile>
   </profiles>
-
   <repositories>
     <repository>
       <id>jboss-public-repository-group</id>
@@ -209,7 +198,6 @@
       </snapshots>
     </repository>
   </repositories>
-
   <pluginRepositories>
     <pluginRepository>
       <id>jboss-public-repository-group</id>
@@ -224,5 +212,4 @@
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
-
 </project>

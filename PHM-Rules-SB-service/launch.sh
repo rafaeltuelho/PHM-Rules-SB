@@ -63,13 +63,12 @@ fi
 
 
 if [[ "$@" =~ "docker" ]]; then
-    echo "Launching the application as docker container..."
-    
-    docker run -d -p 8090:8090 --name PHM-Rules-SB-service apps/PHM-Rules-SB-service:1.0-SNAPSHOT
+    echo "Launching the application as docker container..."    
+    docker run -d -p 8090:8090 --name phm-rules-sb-service apps/phm-rules-sb-service:1.0
 elif [[ "$@" =~ "openshift" ]]; then
     echo "Launching the application on OpenShift..."
     
-    oc new-app PHM-Rules-SB-service:1.0-SNAPSHOT
+    oc new-app PHM-Rules-SB-service:1.0
     oc expose svc/PHM-Rules-SB-service
 else
 
