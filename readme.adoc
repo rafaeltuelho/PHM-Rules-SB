@@ -8,12 +8,12 @@ https://developers.redhat.com/blog/2020/02/19/designing-an-event-driven-business
 
 Go to the *-service directory and run
 [source,bash]
----
+----
 . ./launch.sh clean install
----
+----
 Then post the following payload
 [source,json]
----
+----
 {
     "commands": [
         {
@@ -33,14 +33,14 @@ Then post the following payload
         }
     ]
 }
----
+----
 to the url http://localhost:8090/rest/server/containers/instances/PHM-Rules-SB-kjar-1_0
 
 === Docker Execution
 
 With docker running, in the *-service directory run
 [source,bash]
----
+----
 . ./launch.sh clean install -Pdocker,h2
----
+----
 Then you should be able to continue as in the local execution.
