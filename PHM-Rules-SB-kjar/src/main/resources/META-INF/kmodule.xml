@@ -1,1 +1,6 @@
-<kmodule xmlns="http://www.drools.org/xsd/kmodule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+<kmodule xmlns="http://www.drools.org/xsd/kmodule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <kbase name="MyKIEbase" default="true" eventProcessingMode="stream" equalsBehavior="identity">
+        <ksession name="myStateless" type="stateless" default="true" clockType="realtime"/>
+        <ksession name="myStateful" type="stateful" default="false" clockType="realtime"/>
+    </kbase>
+</kmodule>
