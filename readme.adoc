@@ -15,6 +15,7 @@ Then post the following payload
 [source,json]
 ----
 {
+	"lookup": "myStateless",
     "commands": [
         {
             "insert": {
@@ -30,11 +31,56 @@ Then post the following payload
         },
         {
             "fire-all-rules": {}
+        },
+        {
+            "get-objects": {
+                "out-identifier": "result_facts"
+            }
         }
     ]
 }
 ----
 to the url http://localhost:8090/rest/server/containers/instances/PHM-Rules-SB-kjar-1_0
+
+You can use Postman with Basic Auth `user/user`
+
+or Curl
+[source,bash]
+----
+curl --location --request POST 'http://localhost:8090/rest/server/containers/instances/PHM-Rules-SB-kjar-1_0' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic a2llLXNlcnZlcjpraWUtc2VydmVy' \
+--header 'X-KIE-ContentType: JSON' \
+--header 'Accept: application/json' \
+--header 'Authorization: Basic dXNlcjp1c2Vy' \
+--header 'Content-Type: text/plain' \
+--header 'Cookie: JSESSIONID=C2C81BE4ED2177D8057FA8E41D408AFD' \
+--data-raw '{
+	"lookup": "myStateless",
+    "commands": [
+        {
+            "insert": {
+                "object": {
+                    "com.health_insurance.phm_model.Trigger": {
+                        "triggerId": 74,
+                        "memberId": "xyz123"
+                    }
+                },
+                "out-identifier": "trigger",
+                "return-object": false
+            }
+        },
+        {
+            "fire-all-rules": {}
+        },
+        {
+            "get-objects": {
+                "out-identifier": "result_facts"
+            }
+        }
+    ]
+}'
+----
 
 === Docker Execution
 
