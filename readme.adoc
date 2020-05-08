@@ -15,6 +15,7 @@ Then post the following payload
 [source,json]
 ----
 {
+	"lookup": "phm",
     "commands": [
         {
             "insert": {
