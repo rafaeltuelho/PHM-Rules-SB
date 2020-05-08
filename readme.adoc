@@ -15,7 +15,7 @@ Then post the following payload
 [source,json]
 ----
 {
-	"lookup": "myStateless",
+	"lookup": "phm",
     "commands": [
         {
             "insert": {
